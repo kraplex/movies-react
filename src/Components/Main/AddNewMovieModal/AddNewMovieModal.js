@@ -1,15 +1,17 @@
 import React from 'react'
+import { Button, Modal } from 'react-bootstrap';
 
-const AddNewMovieButton = () => {
-    return <div className="modal-dialog modal-lg" role="document">
-        <div className="modal-content">
-            <div className="modal-header">
-                <h5 className="modal-title">Добавить новый фильм</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div className="modal-body">
+
+const AddNewMovieModal = () => {
+
+    return (
+        <Modal.Dialog className={"modal-lg"}>
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    <h5 className="modal-title">Добавить новый фильм</h5>
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
                 <form className="w-75 mx-auto">
                     <div className="form-group">
                         <label>Название фильма:</label>
@@ -56,9 +58,10 @@ const AddNewMovieButton = () => {
                             </div>
                             <div className="col-sm-2">
                                 <button className="btn btn-primary btn-add-field" type="button">
-                                    <svg className="octicon octicon-plus" viewBox="0 0 12 16" version="1.1" width="12"
+                                    <svg className="octicon octicon-plus" viewBox="0 0 12 16" version="1.1"
+                                         width="12"
                                          height="16" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M12 9H7v5H5V9H0V7h5V2h2v5h5v2z"/>
+                                        <path fillRule="evenodd" d="M12 9H7v5H5V9H0V7h5V2h2v5h5v2z"/>
                                     </svg>
                                 </button>
                             </div>
@@ -74,8 +77,8 @@ const AddNewMovieButton = () => {
                                 <button className="btn btn-danger btn-sm btn-remove-field" type="button">
                                     <svg className="octicon octicon-x" viewBox="0 0 14 18" version="1.1" width="14"
                                          height="18" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-    d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/>
+                                        <path fillRule="evenodd"
+                                              d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/>
                                     </svg>
                                 </button>
                             </div>
@@ -95,13 +98,13 @@ const AddNewMovieButton = () => {
                         <textarea className="form-control" rows="3"></textarea>
                     </div>
                 </form>
-            </div>
-            <div className="modal-footer justify-content-center">
-                <button type="button" className="btn btn-outline-danger" data-dismiss="modal">Отменить</button>
-                <button type="button" className="btn btn-primary mr-3">Сохранить</button>
-            </div>
-        </div>
-    </div>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary">Отменить</Button>
+                <Button variant="primary">Сохранить</Button>
+            </Modal.Footer>
+        </Modal.Dialog>
+    )
 }
 
-export default AddNewMovieButton
+export default AddNewMovieModal
