@@ -10,8 +10,9 @@ const Main = () => {
 
     return (
         <main id="content" className="d-flex flex-wrap justify-content-start align-items-stretch align-content-start">
-            <Route path="/all-movies" render={() => <AllMovies/>}/>
-            <Route path="/movies/:id" render={(props) => <MovieFullCard{...props}/>}/>
+            <Route path="/all-movies" render={(props) => <AllMovies {...props}/>}/>
+            <Route path="/movies/:id" render={(props) => <MovieFullCard {...props}/>}/>
+            <Route path="/search=:searchParam" render={(props) => <AllMovies {...props}/>}/>
             <Route path="/add-new" render={(props) => <AddMovie{...props}/>}/>
             <Route exact path="/" render={() => <WelcomeWindow/>}/>
         </main>

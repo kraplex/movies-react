@@ -1,10 +1,15 @@
 import React from 'react'
 import MovieShortCard from "./MovieCards/MovieShortCard/MovieShortCard";
-import {getData} from "../../Api/Api";
+import {getData, searchData} from "../../Api/Api";
 
 
-const AllMovies = () => {
-    let movies = getData()
+const AllMovies = (props) => {
+    let movies;
+    let searchParam = props.match.params.searchParam;
+    if (searchParam) {
+        movies = searchData(searchParam);
+    } else movies = getData()
+
     return <>
         {(movies.length === 0) ? <main id="content"
                                        className="d-flex flex-wrap justify-content-around align-items-start align-content-start">
