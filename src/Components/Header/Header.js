@@ -1,6 +1,7 @@
 import React from 'react'
 import AllMoviesButton from "./AllMoviesButton";
-import AddNewMovie from "./AddNewMovie.js";
+import AddMovie from "./AddMovie.js";
+
 
 const Header = () => {
     return (
@@ -14,7 +15,7 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-                        <AddNewMovie/>
+                        <AddMovie/>
                         <AllMoviesButton/>
                     </ul>
                     <form id="search" className="form-inline my-2 my-lg-0 d-flex">
