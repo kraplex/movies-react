@@ -9,15 +9,19 @@ export const saveData = (data) => {
 }
 
 export const editData = (data) => {
-    let movies = JSON.parse(localStorage.getItem("movies")).filter(m => m.movieId !== data.movieId)
-    movies.push(data)
-    localStorage.clear()
+    let movies = JSON.parse(localStorage.getItem("movies")).map(movie => {
+        if (movie.movieId === data.movieId) {
+            movie = {...data}
+        }
+        return movie
+    })
+
     localStorage.setItem("movies", JSON.stringify(movies))
 }
 
 export const getData = (id) => {
     return id ?
-        JSON.parse(localStorage.getItem("movies")).filter(m => m.movieId === id)
+        JSON.parse(localStorage.getItem("movies")).filter(m => m.movieId === id)[0]
         : JSON.parse(localStorage.getItem("movies"))
 }
 
@@ -28,23 +32,13 @@ export const deleteData = (id) => {
 }
 
 export const searchData = (value) => {
-    let result = []
-    const moviesToSearch = [];
     let movies = JSON.parse(localStorage.getItem("movies"));
-    movies.forEach((item) => {
-        moviesToSearch.push({
-            movieId: item.movieId,
-            movieTitleRus: item.movieTitleRus.toUpperCase()
-        });
-        // moviesTitleOrig.push(item.movieTitleOrig.toUpperCase())
-    });
-
-    for (let item of moviesToSearch) {
-        if (item.movieTitleRus.indexOf(value) > -1) {
-            result.push(getData(item.movieId))
+    let result = []
+    movies.forEach(movie => {
+        if (movie.movieTitleRus.toUpperCase().indexOf(value) !== -1) {
+            result.push(movie)
         }
-    }
+    });
     return result;
+
 }
-
-

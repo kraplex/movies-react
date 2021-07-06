@@ -1,3 +1,4 @@
 .movie-details {
-    margin-left: 30px;
+    margin: 0 auto;
+    max-width: 70%;
 }

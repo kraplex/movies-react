@@ -5,9 +5,10 @@ import "./MovieFullCard.css"
 const MovieFullCard = (props) => {
 
     let movieId = props.match.params.id
-    let movie = getData(movieId)[0]
+    let movie = getData(movieId)
     return (
-        <div className="movie-details">
+        <div id="content"
+             className="d-flex flex-wrap justify-content-start align-items-center align-content-start movie-details">
             <div className="my-5">
                 <h1 className="my-0">{movie.movieTitleRus}</h1>
                 <h4 className="my-0">{movie.movieTitleOrig}</h4>

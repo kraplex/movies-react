@@ -12,12 +12,21 @@ const Search = () => {
                    type="search"
                    placeholder="Поиск..."
                    aria-label="Search"
+                   value={searchValue}
                    onChange={(e) => {
-                       setSearchValue(e.currentTarget.value.toUpperCase());
+                       setSearchValue(e.currentTarget.value);
                    }}/>
             <NavLink to={`search=${searchValue}`}
                      className="search btn btn-outline-success my-2 my-sm-0"
-                     type="submit">
+                     type="submit"
+                     onClick={(e) => {
+                         if (searchValue === '') {
+                             e.preventDefault();
+                             alert("Введите данные")
+                         } else {
+                             setSearchValue('')
+                         }
+                     }}>
                 <svg className="octicon octicon-search"
                      viewBox="0 0 16 16"
                      version="1.1"

@@ -17,8 +17,10 @@ const MovieShortCard = (props) => {
         <div className="card mt-3">
             <div className="row no-gutters">
                 <div className="col-md-4">
-                    <img src={props.movie.moviePosterLink}
-                         className="card-img" alt="Movie poster"/>
+                    <div >
+                        <img src={props.movie.moviePosterLink}
+                             className="card-img" alt="Movie poster"/>
+                    </div>
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">

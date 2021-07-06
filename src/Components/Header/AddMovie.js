@@ -6,27 +6,6 @@ import {useHistory} from "react-router-dom";
 
 const AddMovie = () => {
 
-    let allFormsAreValid = false
-
-    const validateInputText = (e) => {
-        if (e.target.value.length < 3) {
-            e.target.className += " is-invalid"
-            allFormsAreValid = false
-        } else {
-            e.target.className = "form-control"
-            allFormsAreValid = true
-        }
-    }
-    const validateInputYear = (e) => {
-        if (e.target.value.length !== 4) {
-            e.target.className += " is-invalid"
-            allFormsAreValid = false
-        } else {
-            e.target.className = "form-control"
-            allFormsAreValid = true
-        }
-    }
-
     const movieInitState = {
         movieId: "",
         movieTitleOrig: "",
@@ -46,15 +25,11 @@ const AddMovie = () => {
     let history = useHistory()
 
     const handleSave = () => {
-        if (allFormsAreValid) {
-            movie.movieId = guid();
-            saveData(movie);
-            setMovie(movieInitState);
-            setShow(false);
-            history.push("/all-movies");
-        } else {
-            alert("Проверьте формы")
-        }
+        movie.movieId = guid();
+        saveData(movie);
+        setMovie(movieInitState);
+        setShow(false);
+        history.push("/all-movies");
     }
 
     const [movie, setMovie] = useState(movieInitState);
@@ -77,9 +52,6 @@ const AddMovie = () => {
                             <label>Название фильма:</label>
                             <input type="text"
                                    className="form-control"
-                                   onBlur={(e) => {
-                                       validateInputText(e)
-                                   }}
                                    onChange={(e) => {
                                        setMovie({...movie, movieTitleRus: e.target.value});
                                    }}/>
@@ -88,9 +60,6 @@ const AddMovie = () => {
                             <label>Оригинальное название фильма:</label>
                             <input type="text"
                                    className="form-control"
-                                   onBlur={(e) => {
-                                       validateInputText(e)
-                                   }}
                                    onChange={(e) => {
                                        setMovie({...movie, movieTitleOrig: e.target.value})
                                    }}
@@ -101,9 +70,6 @@ const AddMovie = () => {
                             <input type="text"
                                    className="form-control"
                                    placeholder="https://..."
-                                   onBlur={(e) => {
-                                       validateInputText(e)
-                                   }}
                                    onChange={(e) => {
                                        setMovie({...movie, moviePosterLink: e.target.value})
                                    }}
@@ -116,9 +82,6 @@ const AddMovie = () => {
                                 <div className="col-sm-10">
                                     <input type="text"
                                            className="form-control"
-                                           onBlur={(e) => {
-                                               validateInputYear(e)
-                                           }}
                                            onChange={(e) => {
                                                setMovie({...movie, movieDetailInfoYear: e.target.value})
                                            }}
