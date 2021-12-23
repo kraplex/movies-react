@@ -1,5 +1,5 @@
 import React from 'react';
-import {getData} from "../../../../Api/Api";
+import {getData} from "../../../../State/State";
 import "./MovieFullCard.css"
 
 const MovieFullCard = (props) => {

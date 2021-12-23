@@ -1,7 +1,7 @@
 import React from 'react';
 import "./MovieShortCard.css"
 import {NavLink, useHistory} from "react-router-dom";
-import {deleteData} from "../../../../Api/Api";
+import {deleteData} from "../../../../State/State";
 import EditMovieForm from "../EditMovie/EditMovie";
 
 const MovieShortCard = (props) => {
@@ -11,6 +11,7 @@ const MovieShortCard = (props) => {
     const deleteMovie = () => {
         deleteData(props.movie.movieId)
         history.push("/all-movies");
+        console.log("ss")
     }
 
     return (

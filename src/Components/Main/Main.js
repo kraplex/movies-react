@@ -6,17 +6,17 @@ import {Route} from "react-router";
 import AddMovie from "../Header/AddMovie";
 
 
-const Main = () => {
+const Main = (props) => {
 
     return (
         <>
-            <Route path="/all-movies" render={(props) => <AllMovies {...props}/>}/>
+            <Route path="/all-movies" component={(path) => <AllMovies state={props.state} {...path}/>}/>
             <Route path="/movies/:id" render={(props) => <MovieFullCard {...props}/>}/>
             <Route path="/search=:searchParam" render={(props) => <AllMovies {...props}/>}/>
             <Route path="/add-new" render={(props) => <AddMovie{...props}/>}/>
             <Route exact path="/" render={() => <WelcomeWindow/>}/>
         </>
     );
-};
+}
 
 export default Main;
