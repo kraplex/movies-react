@@ -1,21 +1,15 @@
 import React, {useState} from 'react';
-import {editData} from "../../../../Api/Api";
 import {Button, Modal} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
-import {getData} from "../../../../State/State"
 
 
-const EditMovieForm = (props) => {
+const EditMovieForm = () => {
 
-    let movieId = props.movieId
 
-    const movieInitState = getData(movieId);
-    const [movie, setMovie] = useState(movieInitState);
     const [show, setShow] = useState(false);
     let history = useHistory()
 
     const handleEdit = () => {
-        editData(movie);
         setShow(false);
         history.push("/all-movies");
     }

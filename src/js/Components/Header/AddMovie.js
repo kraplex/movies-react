@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import {Button, Modal} from 'react-bootstrap';
-import {saveData} from "../State/State";
 import {v4 as guid} from 'uuid';
 import {useHistory} from "react-router-dom";
 
 const AddMovie = () => {
+
+    let history = useHistory()
 
     const movieInitState = {
         movieId: "",
@@ -18,29 +19,23 @@ const AddMovie = () => {
         movieDescription: "",
         moviePosterLink: ""
     }
-
+    const [movie, setMovie] = useState(movieInitState);
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    let history = useHistory()
 
     const handleSave = () => {
         movie.movieId = guid();
-        saveData(movie);
         setMovie(movieInitState);
         setShow(false);
         history.push("/all-movies");
     }
 
-    const [movie, setMovie] = useState(movieInitState);
 
     return (
         <>
             <li className="nav-item">
-                <Button id="add-new" type="button" onClick={handleShow}>Добавить новый</Button>
+                <Button id="add-new" type="button" onClick={() => setShow(true)}>Добавить новый</Button>
             </li>
-
-            <Modal dialogClassName={"modal-lg"} show={show} onHide={handleClose}>
+            <Modal dialogClassName={"modal-lg"} show={show} onHide={() => setShow(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>
                         <h5 className="modal-title">Добавить новый фильм</h5>
@@ -104,7 +99,7 @@ const AddMovie = () => {
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">Режиссер:</label>
-                                <div className="col-sm-8">
+                                <div className="col-sm-10">
                                     <input type="text"
                                            className="form-control"
                                         // onBlur={(e) => {
@@ -115,33 +110,33 @@ const AddMovie = () => {
                                            }}
                                     />
                                 </div>
-                                {/*<div className="col-sm-2">*/}
-                                {/*    <button className="btn btn-primary btn-add-field" type="button">*/}
-                                {/*        <svg className="octicon octicon-plus" viewBox="0 0 12 16" version="1.1"*/}
-                                {/*             width="12"*/}
-                                {/*             height="16" aria-hidden="true">*/}
-                                {/*            <path fillRule="evenodd" d="M12 9H7v5H5V9H0V7h5V2h2v5h5v2z"/>*/}
-                                {/*        </svg>*/}
-                                {/*    </button>*/}
-                                {/*</div>*/}
                             </div>
-                            {/*<div className="form-group row">*/}
-                            {/*    <div className="col-sm-5">*/}
-                            {/*        <input type="text" className="form-control" placeholder="Должность"/>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="col-sm-5">*/}
-                            {/*        <input type="text" className="form-control" placeholder="Имя"/>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="col-sm-2">*/}
-                            {/*        <button className="btn btn-danger btn-sm btn-remove-field" type="button">*/}
-                            {/*            <svg className="octicon octicon-x" viewBox="0 0 14 18" version="1.1" width="14"*/}
-                            {/*                 height="18" aria-hidden="true">*/}
-                            {/*                <path fillRule="evenodd"*/}
-                            {/*                      d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/>*/}
-                            {/*            </svg>*/}
-                            {/*        </button>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
+                            <div className="form-group row">
+                                <div className="col-sm-4">
+                                    <input type="text" className="form-control" placeholder="Должность"/>
+                                </div>
+                                <div className="col-sm-4">
+                                    <input type="text" className="form-control" placeholder="Имя"/>
+                                </div>
+                                <div className="col-sm-2">
+                                    <button className="btn btn-primary btn-add-field" type="button">
+                                        <svg className="octicon octicon-plus" viewBox="0 0 12 16" version="1.1"
+                                             width="12"
+                                             height="16" aria-hidden="true">
+                                            <path fillRule="evenodd" d="M12 9H7v5H5V9H0V7h5V2h2v5h5v2z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div className="col-sm-2">
+                                    <button className="btn btn-danger btn-sm btn-remove-field" type="button">
+                                        <svg className="octicon octicon-x" viewBox="0 0 14 18" version="1.1" width="14"
+                                             height="18" aria-hidden="true">
+                                            <path fillRule="evenodd"
+                                                  d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
                         </fieldset>
                         <div className="form-group">
                             <label>В ролях:</label>
@@ -175,7 +170,7 @@ const AddMovie = () => {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>Отменить</Button>
+                    <Button variant="secondary" onClick={() => setShow(false)}>Отменить</Button>
                     <Button variant="primary" onClick={handleSave}>Сохранить</Button>
                 </Modal.Footer>
             </Modal>
