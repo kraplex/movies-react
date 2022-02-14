@@ -8,13 +8,13 @@ const StateReducer = createSlice({
     name: "StateReducer",
     initialState,
     reducers: {
-        toggleFetching: (state, action) => {
-            state.isFetching = action.payload
-        },
-
+        setMovie: (state, action) => {
+            state.allMovies.push(action.payload)
+            console.log(state.allMovies)
+        }
     }
 })
 export default StateReducer.reducer;
 export const {
-    toggleFetching,
+    setMovie,
 } = StateReducer.actions

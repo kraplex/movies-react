@@ -1,6 +1,6 @@
 import React from 'react'
 import AllMoviesButton from "./AllMoviesButton";
-import AddMovie from "./AddMovie.js";
+import AddEditMovie from "./AddEditMovie.js";
 import Search from "./Search";
 
 
@@ -16,7 +16,7 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-                        <AddMovie/>
+                        <AddEditMovie/>
                         <AllMoviesButton/>
                     </ul>
                     <Search/>
