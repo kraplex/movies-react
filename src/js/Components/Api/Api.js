@@ -19,14 +19,15 @@ export const editData = (data) => {
     localStorage.setItem("movies", JSON.stringify(movies))
 }
 
-export const getData = (id) => {
+export const getData = id => {
     return id ?
         JSON.parse(localStorage.getItem("movies")).filter(m => m.movieId === id)[0]
         : JSON.parse(localStorage.getItem("movies"))
 }
 
-export const deleteData = (id) => {
-    let movies = JSON.parse(localStorage.getItem("movies")).filter(m => m.movieId !== id)
+export const deleteData = id => {
+    let movies = JSON.parse(localStorage.getItem("movies"))
+        .filter(m => m.id !== id)
     localStorage.clear()
     localStorage.setItem("movies", JSON.stringify(movies))
 }

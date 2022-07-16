@@ -1,16 +1,24 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import MovieShortCard from "./MovieShortCard";
+import React, {Component} from 'react'
+import MovieShortCardWrapper from "./MovieShortCard";
+import {connect} from "react-redux";
 
-const AllMovies = () => {
+class AllMovies extends Component {
+    constructor(props) {
+        super(props)
+    }
 
-    const allMovies = useSelector(state => state.allMovies)
+    render() {
+        const {allMovies} = this.props;
 
+        return (allMovies.length > 0 ? <MovieShortCardWrapper/> :
+            <div id="content" className="d-flex flex-wrap justify-content-around align-items-start align-content-start">
+                <h1 className="mt-5 text-center">Здесь пока ничего нет(</h1>
+            </div>)
+    }
+}
 
-    return (allMovies.length ? <MovieShortCard/> :
-        <div id="content" className="d-flex flex-wrap justify-content-around align-items-start align-content-start">
-            <h1 className="mt-5 text-center">Здесь пока ничего нет(</h1>
-        </div>)
-};
+const mapStateToProps = store => ({allMovies: store.movies.allMovies})
 
-export default AllMovies;
+const AllMoviesWrapper = connect(mapStateToProps, {})(AllMovies)
+
+export default AllMoviesWrapper;

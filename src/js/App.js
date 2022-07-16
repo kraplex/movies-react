@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./Components/Header/Header";
-import Main from "./Components/Main/Main";
+import MainWrapper from "./Components/Main/Main";
 
 
-export default function App() {
+class App extends Component {
 
-    return (
-        <>
-            <Header/>
-            <Main/>
-            <footer className="text-center my-5">
-                <h6 className="mb-0">Мир Кино | © 2021</h6>
-            </footer>
-        </>
-    )
+    render() {
+        return (
+            <>
+                <Header/>
+                <MainWrapper/>
+                <footer className="text-center my-5">
+                    <h6 className="mb-0">Мир Кино</h6>
+                </footer>
+            </>
+        )
+    }
 }
+
+export default App
