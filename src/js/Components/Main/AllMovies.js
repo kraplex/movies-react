@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
 import MovieShortCardWrapper from "./MovieShortCard";
 import {connect} from "react-redux";
+import {getAllMovies} from "../Redux/moviesReducer";
 
 class AllMovies extends Component {
     constructor(props) {
         super(props)
+    }
+
+    componentDidMount() {
+        this.props.getAllMovies();
     }
 
     render() {
@@ -18,7 +23,5 @@ class AllMovies extends Component {
 }
 
 const mapStateToProps = store => ({allMovies: store.movies.allMovies})
-
-const AllMoviesWrapper = connect(mapStateToProps, {})(AllMovies)
-
+const AllMoviesWrapper = connect(mapStateToProps, {getAllMovies})(AllMovies)
 export default AllMoviesWrapper;

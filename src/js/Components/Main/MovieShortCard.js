@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {NavLink} from "react-router-dom";
 import AddEditMovie from "../Header/AddEditMovie";
 import {connect} from "react-redux";
-import {deleteData} from "../Api/Api";
+import {Button} from "react-bootstrap";
+import {deleteMovie, setShowFullCard} from "../Redux/moviesReducer";
 
 class MovieShortCard extends Component {
 
     render() {
-        const {allMovies} = this.props
+        const {allMovies, setShowFullCard, deleteMovie} = this.props;
 
         return (
             <div style={{display: 'flex'}}>
@@ -15,7 +15,7 @@ class MovieShortCard extends Component {
                     <div className="row no-gutters">
                         <div className="col-md-4">
                             <div>
-                                <img src={movie.moviePosterLink || ''}
+                                <img src={movie.posterLink || ''}
                                      className="card-img" alt="Movie poster"/>
                             </div>
                         </div>
@@ -25,13 +25,15 @@ class MovieShortCard extends Component {
                                 <p className="card-text">{movie.description || ''}</p>
                                 <p className="card-text"><small
                                     className="font-weight-bold">IMDB: {movie.imdbRate || ''}</small></p>
-                                <div className="card-text"><NavLink to={`movies/${movie.id || ''}`}
-                                                                    className="more">Подробнее...</NavLink></div>
+                                <div className="card-text">
+                                    <Button className="more"
+                                            onClick={() => setShowFullCard(movie.id)}>Подробнее...</Button></div>
                             </div>
                         </div>
                         <div className="card-footer">
                             <AddEditMovie movieId={movie.id || ''}/>
-                            <button className="btn btn-sm btn-outline-danger btn-delete" onClick={() => deleteData(movie.id)}>
+                            <button className="btn btn-sm btn-outline-danger btn-delete"
+                                    onClick={() => deleteMovie(movie.id)}>
                                 <svg className="octicon octicon-x" viewBox="0 0 14 18" version="1.1" width="14"
                                      height="18"
                                      aria-hidden="true">
@@ -47,7 +49,5 @@ class MovieShortCard extends Component {
 }
 
 const mapStateToProps = store => ({allMovies: store.movies.allMovies});
-
-const MovieShortCardWrapper = connect(mapStateToProps, {})(MovieShortCard);
-
+const MovieShortCardWrapper = connect(mapStateToProps, {deleteMovie, setShowFullCard})(MovieShortCard);
 export default MovieShortCardWrapper;

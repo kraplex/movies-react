@@ -1,36 +1,39 @@
 import React, {Component} from 'react'
 import WelcomeWindow from "./WelcomeWindow";
 import AllMovies from "./AllMovies";
-import MovieFullCard from "./MovieFullCard";
-import {Route} from "react-router";
 import AddEditMovie from "../Header/AddEditMovie";
-import {getData} from "../Api/Api";
 import {connect} from "react-redux";
 import {getAllMovies} from "../Redux/moviesReducer";
+import MovieFullCardWrapper from "./MovieFullCard";
 
 class Main extends Component {
-
-    componentDidMount() {
-        const movies = getData();
-        this.props.getAllMovies(movies);
-
+    constructor(props) {
+        super(props);
+        this.state = {}
     }
 
     render() {
+        const {showAllMovies, showWelcomeWindow, showMovieFullCard, showAddEditModal} = this.props;
+
         return (
             <>
-                <Route path="/all-movies" render={() => <AllMovies/>}/>
-                <Route path="/movies/:id" render={() => <MovieFullCard/>}/>
-                <Route path="/search=:searchParam" render={() => <AllMovies/>}/>
-                <Route path="/add-new" render={() => <AddEditMovie/>}/>
-                <Route exact path="/" render={() => <WelcomeWindow/>}/>
+                {showWelcomeWindow && <WelcomeWindow/>}
+                {showAllMovies && <AllMovies/>}
+                {showMovieFullCard && <MovieFullCardWrapper/>}
+                {showAddEditModal && <AddEditMovie/>}
             </>
         );
     }
 }
 
-const mapStateToProps = store => ({})
-
+const mapStateToProps = store => (
+    {
+        allMovies: store.movies.allMovies,
+        showAllMovies: store.movies.showAllMovies,
+        showWelcomeWindow: store.movies.showWelcomeWindow,
+        showMovieFullCard: store.movies.showMovieFullCard,
+        showAddEditModal: store.movies.showAddEditModal,
+    }
+)
 const MainWrapper = connect(mapStateToProps, {getAllMovies})(Main)
-
 export default MainWrapper;

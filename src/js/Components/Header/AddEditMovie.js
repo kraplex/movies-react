@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import {Button, Modal} from 'react-bootstrap';
 import {v4 as guid} from 'uuid';
-import {saveData} from "../Api/Api";
 import {connect} from "react-redux";
-
+import {saveMovie} from "../Redux/moviesReducer";
 
 class AddEditMovie extends Component {
     constructor(props) {
@@ -27,8 +26,6 @@ class AddEditMovie extends Component {
     }
 
     handleSave = () => {
-
-
         let movie = {
             titleOriginal: this.state.titleOriginal,
             titleRus: this.state.titleRus,
@@ -41,21 +38,19 @@ class AddEditMovie extends Component {
             posterLink: this.state.posterLink,
             id: guid()
         }
-        saveData(movie)
+        this.props.saveMovie(movie)
         this.setValue('showAddEditModal', false);
     }
 
 
     render() {
-
         const {setValue} = this;
         const {showAddEditModal} = this.state;
 
         return (
             <>
                 <li className='nav-item'>
-                    <Button id='add-new' type='button' onClick={() => setValue('showAddEditModal', true)}>Добавить
-                        новый</Button>
+                    <Button variant="primary" onClick={() => setValue('showAddEditModal', true)}>Добавить новый</Button>
                 </li>
                 <Modal dialogClassName={'modal-lg'} show={showAddEditModal}
                        onHide={() => setValue('showAddEditModal', false)}>
@@ -189,10 +184,6 @@ class AddEditMovie extends Component {
     }
 }
 
-const mapStateToProps = store => {
-    return {}
-}
-
-const AddEditMovieWrapper = connect(mapStateToProps, {})(AddEditMovie)
-
+const mapStateToProps = store => ({})
+const AddEditMovieWrapper = connect(mapStateToProps, {saveMovie})(AddEditMovie)
 export default AddEditMovieWrapper

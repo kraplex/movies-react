@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import AllMoviesButton from "./AllMoviesButton";
 import AddEditMovie from "./AddEditMovie.js";
-import Search from "./Search";
+import AllMoviesButtonWrapper from "./AllMoviesButton";
+import SearchWrapper from "./Search";
 
 class Header extends Component {
 
@@ -18,9 +18,9 @@ class Header extends Component {
                     <div className="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                             <AddEditMovie/>
-                            <AllMoviesButton/>
+                            <AllMoviesButtonWrapper/>
                         </ul>
-                        <Search/>
+                        <SearchWrapper/>
                     </div>
                 </nav>
             </header>)

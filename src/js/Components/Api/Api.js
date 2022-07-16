@@ -9,7 +9,7 @@ export const saveData = (data) => {
 }
 
 export const editData = (data) => {
-    let movies = JSON.parse(localStorage.getItem("movies")).map(movie => {
+    const movies = JSON.parse(localStorage.getItem("movies")).map(movie => {
         if (movie.movieId === data.movieId) {
             movie = {...data}
         }
@@ -26,17 +26,18 @@ export const getData = id => {
 }
 
 export const deleteData = id => {
-    let movies = JSON.parse(localStorage.getItem("movies"))
+    const movies = JSON.parse(localStorage.getItem("movies"))
         .filter(m => m.id !== id)
     localStorage.clear()
     localStorage.setItem("movies", JSON.stringify(movies))
+    return movies
 }
 
 export const searchData = (value) => {
     let movies = JSON.parse(localStorage.getItem("movies"));
     let result = []
     movies.forEach(movie => {
-        if (movie.movieTitleRus.toUpperCase().indexOf(value) !== -1) {
+        if (movie.titleRus.toUpperCase().indexOf(value) > 0) {
             result.push(movie)
         }
     });

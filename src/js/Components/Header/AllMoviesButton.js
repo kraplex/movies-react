@@ -1,16 +1,19 @@
-import React from 'react'
-import {NavLink} from "react-router-dom";
+import React, {Component} from 'react'
+import {Button} from "react-bootstrap";
+import {connect} from "react-redux";
+import {setShowAllMovies} from "../Redux/moviesReducer";
 
-const AllMoviesButton = () => {
+class AllMoviesButton extends Component {
 
-    return (
-        <li className="nav-item active">
-            <NavLink className="nav-link all-movies" to="/all-movies">Все фильмы</NavLink>
-        </li>
-    )
-
-
+    render() {
+        return (
+            <li className="nav-item active">
+                <Button variant="light" onClick={() => this.props.setShowAllMovies()}>Все фильмы</Button>
+            </li>
+        )
+    }
 }
 
-
-export default AllMoviesButton;
+const mapStateToProps = store => ({})
+const AllMoviesButtonWrapper = connect(mapStateToProps, {setShowAllMovies})(AllMoviesButton);
+export default AllMoviesButtonWrapper;
