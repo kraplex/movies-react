@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import {v4 as guid} from 'uuid';
 import {connect} from "react-redux";
 import {saveMovie} from "../Redux/moviesReducer";
 
-class AddEditMovie extends Component {
+class AddMovieButton extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,14 +16,12 @@ class AddEditMovie extends Component {
             imdb: '',
             description: '',
             posterLink: '',
-            showAddEditModal: false,
+            showAddForm: false,
             country: ''
         }
     }
 
-    setValue = (key, value) => {
-        this.setState({[key]: value})
-    }
+    setValue = (key, value) => this.setState({[key]: value});
 
     handleSave = () => {
         let movie = {
@@ -37,23 +35,22 @@ class AddEditMovie extends Component {
             description: this.state.description,
             posterLink: this.state.posterLink,
             id: guid()
-        }
-        this.props.saveMovie(movie)
-        this.setValue('showAddEditModal', false);
+        };
+        this.props.saveMovie(movie);
+        this.setValue('showAddForm', false);
     }
-
 
     render() {
         const {setValue} = this;
-        const {showAddEditModal} = this.state;
+        const {showAddForm} = this.state;
 
         return (
             <>
                 <li className='nav-item'>
-                    <Button variant="primary" onClick={() => setValue('showAddEditModal', true)}>Добавить новый</Button>
+                    <Button variant="primary" onClick={() => setValue('showAddForm', true)}>Добавить новый</Button>
                 </li>
-                <Modal dialogClassName={'modal-lg'} show={showAddEditModal}
-                       onHide={() => setValue('showAddEditModal', false)}>
+                <Modal dialogClassName={'modal-lg'} show={showAddForm}
+                       onHide={() => setValue('showAddForm', false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                             <h5 className='modal-title'>Добавить новый фильм</h5>
@@ -65,26 +62,20 @@ class AddEditMovie extends Component {
                                 <label>Название фильма:</label>
                                 <input type='text'
                                        className='form-control'
-                                       onChange={({target: {value}}) => {
-                                           setValue('titleRus', value);
-                                       }}/>
+                                       onChange={({target: {value}}) => setValue('titleRus', value)}/>
                             </div>
                             <div className='form-group'>
                                 <label>Оригинальное название фильма:</label>
                                 <input type='text'
                                        className='form-control'
-                                       onChange={({target: {value}}) => {
-                                           setValue('titleOriginal', value);
-                                       }}/>
+                                       onChange={({target: {value}}) => setValue('titleOriginal', value)}/>
                             </div>
                             <div className='form-group'>
                                 <label>Ссылка на постер:</label>
                                 <input type='text'
                                        className='form-control'
                                        placeholder='https://...'
-                                       onChange={({target: {value}}) => {
-                                           setValue('posterLink', value);
-                                       }}/>
+                                       onChange={({target: {value}}) => setValue('posterLink', value)}/>
                             </div>
                             <fieldset className='form-group'>
                                 <legend className='col-form-label pt-0'>Детальная информация:</legend>
@@ -93,9 +84,7 @@ class AddEditMovie extends Component {
                                     <div className='col-sm-10'>
                                         <input type='text'
                                                className='form-control'
-                                               onChange={({target: {value}}) => {
-                                                   setValue('year', value);
-                                               }}/>
+                                               onChange={({target: {value}}) => setValue('year', value)}/>
                                     </div>
                                 </div>
                                 <div className='form-group row'>
@@ -103,9 +92,7 @@ class AddEditMovie extends Component {
                                     <div className='col-sm-10'>
                                         <input type='text'
                                                className='form-control'
-                                               onChange={({target: {value}}) => {
-                                                   setValue('country', value);
-                                               }}/>
+                                               onChange={({target: {value}}) => setValue('country', value)}/>
                                     </div>
                                 </div>
                                 <div className='form-group row'>
@@ -113,9 +100,7 @@ class AddEditMovie extends Component {
                                     <div className='col-sm-10'>
                                         <input type='text'
                                                className='form-control'
-                                               onChange={({target: {value}}) => {
-                                                   setValue('director', value);
-                                               }}/>
+                                               onChange={({target: {value}}) => setValue('director', value)}/>
                                     </div>
                                 </div>
                                 <div className='form-group row'>
@@ -151,31 +136,25 @@ class AddEditMovie extends Component {
                                 <textarea className='form-control'
                                           rows='3'
                                           placeholder='Укажите актеров через запятую.'
-                                          onChange={({target: {value}}) => {
-                                              setValue('actors', value.split(','));
-                                          }}/>
+                                          onChange={({target: {value}}) => setValue('actors', value.split(','))}/>
                             </div>
                             <div className='form-group'>
                                 <label>Рейтинг IMDB:</label>
                                 <input type='text'
                                        className='form-control'
-                                       onChange={({target: {value}}) => {
-                                           setValue('imdb', value);
-                                       }}/>
+                                       onChange={({target: {value}}) => setValue('imdb', value)}/>
                             </div>
                             <div className='form-group'>
                                 <label>Описание:</label>
                                 <textarea className='form-control'
                                           rows='3'
-                                          onChange={({target: {value}}) => {
-                                              setValue('description', value);
-                                          }}/>
+                                          onChange={({target: {value}}) => setValue('description', value)}/>
                             </div>
                         </form>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant='secondary'
-                                onClick={() => setValue('showAddEditModal', false)}>Отменить</Button>
+                                onClick={() => setValue('showAddForm', false)}>Отменить</Button>
                         <Button variant='primary' onClick={this.handleSave}>Сохранить</Button>
                     </Modal.Footer>
                 </Modal>
@@ -184,6 +163,6 @@ class AddEditMovie extends Component {
     }
 }
 
-const mapStateToProps = store => ({})
-const AddEditMovieWrapper = connect(mapStateToProps, {saveMovie})(AddEditMovie)
-export default AddEditMovieWrapper
+const mapStateToProps = store => ({allMovies: store.movies.allMovies});
+const AddMovieButtonWrapper = connect(mapStateToProps, {saveMovie})(AddMovieButton);
+export default AddMovieButtonWrapper;

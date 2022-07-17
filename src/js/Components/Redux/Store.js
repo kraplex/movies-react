@@ -7,7 +7,5 @@ let reducers = combineReducers(
         movies: moviesReducer,
     }
 )
-
-let store = createStore(reducers, applyMiddleware(thunk))
-
+let store = createStore(reducers, applyMiddleware(thunk));
 export default store;

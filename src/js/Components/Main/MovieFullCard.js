@@ -44,7 +44,7 @@ class MovieFullCard extends Component {
                 <div className="col-sm-3">
                     <h3>В ролях:</h3>
                     <ul className="list-unstyled">
-                        {movie.actors.map((actor) => <li>{actor}</li>)}
+                        {movie.actors.map(actor => <li>{actor}</li>)}
                     </ul>
                 </div>
             </div>
@@ -55,6 +55,6 @@ class MovieFullCard extends Component {
 const mapStateToProps = store => ({
     movieId: store.movies.showMovieFullCard,
     allMovies: store.movies.allMovies,
-})
+});
 const MovieFullCardWrapper = connect(mapStateToProps, {})(MovieFullCard);
 export default MovieFullCardWrapper;

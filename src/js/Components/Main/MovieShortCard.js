@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import AddEditMovie from "../Header/AddEditMovie";
 import {connect} from "react-redux";
 import {Button} from "react-bootstrap";
 import {deleteMovie, setShowFullCard} from "../Redux/moviesReducer";
+import EditMovieWrapper from "./EditMovieFrom";
 
 class MovieShortCard extends Component {
 
@@ -31,12 +31,11 @@ class MovieShortCard extends Component {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <AddEditMovie movieId={movie.id || ''}/>
+                            <EditMovieWrapper movieId={movie.id}/>
                             <button className="btn btn-sm btn-outline-danger btn-delete"
                                     onClick={() => deleteMovie(movie.id)}>
-                                <svg className="octicon octicon-x" viewBox="0 0 14 18" version="1.1" width="14"
-                                     height="18"
-                                     aria-hidden="true">
+                                <svg className="octicon octicon-x"
+                                     viewBox="0 0 14 18" version="1.1" width="14" height="18" aria-hidden="true">
                                     <path fillRule="evenodd"
                                           d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/>
                                 </svg>

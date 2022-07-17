@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const WelcomeWindow = () => {
     return (
@@ -8,4 +8,4 @@ const WelcomeWindow = () => {
     )
 }
 
-export default WelcomeWindow
+export default WelcomeWindow;

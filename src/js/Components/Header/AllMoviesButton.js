@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
 import {setShowAllMovies} from "../Redux/moviesReducer";
@@ -14,6 +14,6 @@ class AllMoviesButton extends Component {
     }
 }
 
-const mapStateToProps = store => ({})
+const mapStateToProps = store => ({});
 const AllMoviesButtonWrapper = connect(mapStateToProps, {setShowAllMovies})(AllMoviesButton);
 export default AllMoviesButtonWrapper;

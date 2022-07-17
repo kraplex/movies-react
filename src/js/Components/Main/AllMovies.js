@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import MovieShortCardWrapper from "./MovieShortCard";
 import {connect} from "react-redux";
 import {getAllMovies} from "../Redux/moviesReducer";
@@ -22,6 +22,6 @@ class AllMovies extends Component {
     }
 }
 
-const mapStateToProps = store => ({allMovies: store.movies.allMovies})
-const AllMoviesWrapper = connect(mapStateToProps, {getAllMovies})(AllMovies)
+const mapStateToProps = store => ({allMovies: store.movies.allMovies});
+const AllMoviesWrapper = connect(mapStateToProps, {getAllMovies})(AllMovies);
 export default AllMoviesWrapper;

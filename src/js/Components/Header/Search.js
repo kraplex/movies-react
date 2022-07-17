@@ -11,9 +11,7 @@ class Search extends Component {
         }
     }
 
-    setValue = (key, value) => {
-        this.setState({[key]: value})
-    }
+    setValue = (key, value) => this.setState({[key]: value});
 
     render() {
         const {searchValue} = this.state;
@@ -36,7 +34,7 @@ class Search extends Component {
                                 alert("Введите данные");
                             } else {
                                 e.preventDefault();
-                                searchMovie(searchValue)
+                                searchMovie(searchValue);
                             }
                         }}>
                     <svg className="octicon octicon-search"
@@ -53,6 +51,6 @@ class Search extends Component {
     }
 }
 
-const mapStateToProps = store => ({})
-const SearchWrapper = connect(mapStateToProps, {searchMovie})(Search)
-export default SearchWrapper
+const mapStateToProps = store => ({});
+const SearchWrapper = connect(mapStateToProps, {searchMovie})(Search);
+export default SearchWrapper;

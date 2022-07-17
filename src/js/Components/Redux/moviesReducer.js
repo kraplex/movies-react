@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {deleteData, getData, saveData, searchData} from "../Api/Api";
+import {deleteData, editData, getData, saveData, searchData} from "../Api/Api";
 
 const initialState = {
     allMovies: [],
@@ -7,6 +7,7 @@ const initialState = {
     showMovieFullCard: false,
     showAddEditModal: false,
     showWelcomeWindow: true,
+    movieToEdit: {}
 };
 
 const moviesReducer = createSlice({
@@ -22,6 +23,30 @@ const moviesReducer = createSlice({
                 showMovieFullCard: false,
                 showAddEditModal: false,
                 showWelcomeWindow: false
+            }
+        },
+        setMovieToEdit: (store, action) => {
+            const allMovies = getData();
+            const movieToEdit = allMovies.filter(movie => movie.id === action.payload)[0]
+            return {
+                ...store,
+                movieToEdit,
+            }
+        },
+        editMovie: (store, action) => {
+            return {
+                ...store,
+                movieToEdit: {
+                    ...store.movieToEdit,
+                    [action.payload.key]: action.payload.value
+                }
+            }
+        },
+        saveEditedMovie: (store, action) => {
+            const allMovies = editData(action.payload)
+            return {
+                ...store,
+                allMovies
             }
         },
         setShowFullCard: (store, action) => {
@@ -75,5 +100,8 @@ export const {
     saveMovie,
     deleteMovie,
     setShowFullCard,
-    searchMovie
+    searchMovie,
+    setMovieToEdit,
+    editMovie,
+    saveEditedMovie
 } = moviesReducer.actions
