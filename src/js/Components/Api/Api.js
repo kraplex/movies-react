@@ -33,11 +33,11 @@ export const deleteData = id => {
     return movies
 }
 
-export const searchData = (value) => {
+export const searchData = value => {
     let movies = JSON.parse(localStorage.getItem("movies"));
     let result = []
     movies.forEach(movie => {
-        if (movie.titleRus.toUpperCase().indexOf(value) > 0) {
+        if (movie.titleRus.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
             result.push(movie)
         }
     });

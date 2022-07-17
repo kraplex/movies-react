@@ -14,8 +14,10 @@ const moviesReducer = createSlice({
     initialState,
     reducers: {
         setShowAllMovies: store => {
+            const movies = getData();
             return {
                 ...store,
+                allMovies: movies || [],
                 showAllMovies: true,
                 showMovieFullCard: false,
                 showAddEditModal: false,
