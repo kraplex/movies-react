@@ -4,7 +4,7 @@ import {v4 as guid} from 'uuid';
 import {connect} from "react-redux";
 import {saveMovie} from "../Redux/moviesReducer";
 
-class AddMovieButton extends Component {
+export class AddMovieButton extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -47,7 +47,7 @@ class AddMovieButton extends Component {
         return (
             <>
                 <li className='nav-item'>
-                    <Button variant="primary" onClick={() => setValue('showAddForm', true)}>Добавить новый</Button>
+                    <Button id='addMovieButton' variant="primary" onClick={() => setValue('showAddForm', true)}>Добавить новый</Button>
                 </li>
                 <Modal dialogClassName={'modal-lg'} show={showAddForm}
                        onHide={() => setValue('showAddForm', false)}>
@@ -61,18 +61,21 @@ class AddMovieButton extends Component {
                             <div className='form-group'>
                                 <label>Название фильма:</label>
                                 <input type='text'
+                                       id='inputTitleRus'
                                        className='form-control'
                                        onChange={({target: {value}}) => setValue('titleRus', value)}/>
                             </div>
                             <div className='form-group'>
                                 <label>Оригинальное название фильма:</label>
                                 <input type='text'
+                                       id='inputTitleOriginal'
                                        className='form-control'
                                        onChange={({target: {value}}) => setValue('titleOriginal', value)}/>
                             </div>
                             <div className='form-group'>
                                 <label>Ссылка на постер:</label>
                                 <input type='text'
+                                       id='inputPosterLink'
                                        className='form-control'
                                        placeholder='https://...'
                                        onChange={({target: {value}}) => setValue('posterLink', value)}/>
@@ -83,6 +86,7 @@ class AddMovieButton extends Component {
                                     <label className='col-sm-2 col-form-label'>Год:</label>
                                     <div className='col-sm-10'>
                                         <input type='text'
+                                               id='inputYear'
                                                className='form-control'
                                                onChange={({target: {value}}) => setValue('year', value)}/>
                                     </div>
@@ -91,6 +95,7 @@ class AddMovieButton extends Component {
                                     <label className='col-sm-2 col-form-label'>Страна:</label>
                                     <div className='col-sm-10'>
                                         <input type='text'
+                                               id='inputCountry'
                                                className='form-control'
                                                onChange={({target: {value}}) => setValue('country', value)}/>
                                     </div>
@@ -99,6 +104,7 @@ class AddMovieButton extends Component {
                                     <label className='col-sm-2 col-form-label'>Режиссер:</label>
                                     <div className='col-sm-10'>
                                         <input type='text'
+                                               id='inputDirector'
                                                className='form-control'
                                                onChange={({target: {value}}) => setValue('director', value)}/>
                                     </div>
@@ -135,12 +141,14 @@ class AddMovieButton extends Component {
                                 <label>В ролях:</label>
                                 <textarea className='form-control'
                                           rows='3'
+                                          id='inputActors'
                                           placeholder='Укажите актеров через запятую.'
                                           onChange={({target: {value}}) => setValue('actors', value.split(','))}/>
                             </div>
                             <div className='form-group'>
                                 <label>Рейтинг IMDB:</label>
                                 <input type='text'
+                                       id='inputImdb'
                                        className='form-control'
                                        onChange={({target: {value}}) => setValue('imdb', value)}/>
                             </div>
@@ -148,14 +156,18 @@ class AddMovieButton extends Component {
                                 <label>Описание:</label>
                                 <textarea className='form-control'
                                           rows='3'
+                                          id='inputDescription'
                                           onChange={({target: {value}}) => setValue('description', value)}/>
                             </div>
                         </form>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant='secondary'
+                                id='closeAddForm'
                                 onClick={() => setValue('showAddForm', false)}>Отменить</Button>
-                        <Button variant='primary' onClick={this.handleSave}>Сохранить</Button>
+                        <Button variant='primary'
+                                id='saveAddForm'
+                                onClick={this.handleSave}>Сохранить</Button>
                     </Modal.Footer>
                 </Modal>
             </>
@@ -164,5 +176,4 @@ class AddMovieButton extends Component {
 }
 
 const mapStateToProps = store => ({allMovies: store.movies.allMovies});
-const AddMovieButtonWrapper = connect(mapStateToProps, {saveMovie})(AddMovieButton);
-export default AddMovieButtonWrapper;
+export default connect(mapStateToProps, {saveMovie})(AddMovieButton);

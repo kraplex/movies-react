@@ -3,7 +3,7 @@ import {Button} from "react-bootstrap";
 import {searchMovie} from "../Redux/moviesReducer";
 import {connect} from "react-redux";
 
-class Search extends Component {
+export class Search extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -52,5 +52,4 @@ class Search extends Component {
 }
 
 const mapStateToProps = store => ({});
-const SearchWrapper = connect(mapStateToProps, {searchMovie})(Search);
-export default SearchWrapper;
+export default connect(mapStateToProps, {searchMovie})(Search);

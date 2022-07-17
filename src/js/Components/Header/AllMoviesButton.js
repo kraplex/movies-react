@@ -3,7 +3,7 @@ import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
 import {setShowAllMovies} from "../Redux/moviesReducer";
 
-class AllMoviesButton extends Component {
+export class AllMoviesButton extends Component {
 
     render() {
         return (
@@ -15,5 +15,4 @@ class AllMoviesButton extends Component {
 }
 
 const mapStateToProps = store => ({});
-const AllMoviesButtonWrapper = connect(mapStateToProps, {setShowAllMovies})(AllMoviesButton);
-export default AllMoviesButtonWrapper;
+export default connect(mapStateToProps, {setShowAllMovies})(AllMoviesButton);
