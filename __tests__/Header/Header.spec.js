@@ -6,6 +6,7 @@ import SearchWrapper, {Search} from "../../src/js/Components/Header/Search";
 import {Button} from "react-bootstrap";
 import AllMoviesButton from "../../src/js/Components/Header/AllMoviesButton";
 import AddMovieButtonWrapper, {AddMovieButton} from "../../src/js/Components/Header/AddMovieButton";
+import store from '../../src/js/Components/Redux/Store';
 
 describe('Should render Header, Search, AllMoviesButton components', () => {
 
@@ -30,8 +31,7 @@ describe('Should render Header, Search, AllMoviesButton components', () => {
         const component = mount(<Provider store={store}>
             <SearchWrapper/>
         </Provider>)
-        window.alert = () => {
-        }
+        window.alert = () => {}
         expect(component.exists()).toBe(true)
         component.find('input').simulate('change', {currentTarget: {value: "test"}})
         component.find(Button).simulate('click')
@@ -39,8 +39,7 @@ describe('Should render Header, Search, AllMoviesButton components', () => {
 
     it('render Search, searchMovie prop', () => {
         const props = {
-            searchMovie: () => {
-            }
+            searchMovie: () => {}
         }
         const component = shallow(<Search {...props}/>)
         component.find('input').simulate('change', {currentTarget: {value: "test"}})
@@ -63,8 +62,7 @@ describe('Should render Header, Search, AllMoviesButton components', () => {
         const store = mockStore(initialState);
 
         const props = {
-            setShowAllMovies: () => {
-            }
+            setShowAllMovies: () => {}
         }
         const component = mount(<Provider store={store}><AllMoviesButton {...props}/></Provider>)
         component.find(Button).simulate('click')
@@ -81,17 +79,6 @@ describe('Should render Header, Search, AllMoviesButton components', () => {
     });
 
     it('render AddMovieButton and test inputs', () => {
-        const mockStore = configureMockStore();
-        const initialState = {
-            allMovies: [],
-            showAllMovies: false,
-            showMovieFullCard: false,
-            showAddEditModal: false,
-            showWelcomeWindow: true,
-            movieToEdit: {}
-        };
-        const store = mockStore(initialState);
-
         const props = {
             allMovies: [],
             saveMovie: () => {
@@ -112,5 +99,4 @@ describe('Should render Header, Search, AllMoviesButton components', () => {
         component.find('textarea[id="inputDescription"]').simulate('change', {target: {value: 'test'}})
         component.find('button[id="closeAddForm"]').simulate('click')
     });
-
 });

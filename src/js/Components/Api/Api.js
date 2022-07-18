@@ -1,5 +1,6 @@
 export const saveData = data => {
     let movies = [];
+    //istanbul ignore else
     if (localStorage.getItem("movies")) {
         movies = JSON.parse(localStorage.getItem("movies"));
         localStorage.clear();
@@ -10,6 +11,7 @@ export const saveData = data => {
 
 export const editData = data => {
     const movies = JSON.parse(localStorage.getItem("movies")).map(movie => {
+        //istanbul ignore else
         if (movie.movieId === data.movieId) {
             movie = {...data};
         }
