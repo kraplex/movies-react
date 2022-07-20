@@ -3,7 +3,7 @@ import MovieShortCardWrapper from "./MovieShortCard";
 import {connect} from "react-redux";
 import {getAllMovies} from "../Redux/moviesReducer";
 
-class AllMovies extends Component {
+export class AllMovies extends Component {
     constructor(props) {
         super(props)
     }

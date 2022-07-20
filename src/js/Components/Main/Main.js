@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import WelcomeWindow from "./WelcomeWindow";
 import AllMovies from "./AllMovies";
 import {connect} from "react-redux";
-import {getAllMovies} from "../Redux/moviesReducer";
 import MovieFullCardWrapper from "./MovieFullCard";
 
-class Main extends Component {
+export class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -33,5 +32,4 @@ const mapStateToProps = store => (
         showAddEditModal: store.movies.showAddEditModal,
     }
 );
-const MainWrapper = connect(mapStateToProps, {getAllMovies})(Main);
-export default MainWrapper;
+export default connect(mapStateToProps, {})(Main);
