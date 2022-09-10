@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 
-class MovieFullCard extends Component {
-    constructor(props) {
-        super(props)
-    }
+export class MovieFullCard extends Component {
 
     render() {
         const {allMovies, movieId} = this.props;
-        const movie = allMovies.filter(movie => movie.id === movieId)[0]
+        const movie = allMovies.filter(i => i.id === movieId)[0]
 
         return (<div id="content"
                      className="d-flex flex-wrap justify-content-start align-items-center align-content-start movie-details">
@@ -44,7 +41,7 @@ class MovieFullCard extends Component {
                 <div className="col-sm-3">
                     <h3>В ролях:</h3>
                     <ul className="list-unstyled">
-                        {movie.actors.map(actor => <li>{actor}</li>)}
+                        {movie.actors.map((item, index) => <li key={index}>{item}</li>)}
                     </ul>
                 </div>
             </div>

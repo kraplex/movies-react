@@ -4,13 +4,15 @@ import store from "../../src/js/Components/Redux/Store";
 import {Provider} from "react-redux";
 import EditMovieWrapper, {EditMovie} from "../../src/js/Components/Main/EditMovieFrom";
 import MainWrapper, {Main} from "../../src/js/Components/Main/Main";
+import MovieFullCardWrapper, {MovieFullCard} from "../../src/js/Components/Main/MovieFullCard";
 
 describe('Main components', () => {
 
     it('AllMovies length === 0', () => {
         const props = {
             allMovies: [],
-            getAllMovies: () => {}
+            getAllMovies: () => {
+            }
         };
         const component = shallow(<AllMovies {...props}/>);
         component.instance();
@@ -19,7 +21,8 @@ describe('Main components', () => {
     it('AllMovies length > 0', () => {
         const props = {
             allMovies: [{}],
-            getAllMovies: () => {}
+            getAllMovies: () => {
+            }
         };
         shallow(<AllMovies {...props}/>);
     });
@@ -27,7 +30,8 @@ describe('Main components', () => {
     it('AllMoviesWrapper', () => {
         const props = {
             allMovies: [],
-            getAllMovies: () => {}
+            getAllMovies: () => {
+            }
         };
         mount(<Provider store={store}>
             <AllMoviesWrapper {...props}/>
@@ -39,9 +43,12 @@ describe('Main components', () => {
             allMovies: [],
             movieToEdit: {},
             movieId: 'test',
-            saveEditedMovie: () => {},
-            editMovie: () => {},
-            setMovieToEdit: () => {},
+            saveEditedMovie: () => {
+            },
+            editMovie: () => {
+            },
+            setMovieToEdit: () => {
+            },
         };
         const component = shallow(<EditMovie {...props}/>);
         const instance = component.instance();
@@ -63,10 +70,14 @@ describe('Main components', () => {
 
         const props = {
             allMovies: [],
-            saveMovie: () => {},
-            setMovieToEdit: () => {},
-            editMovie: () => {},
-            saveEditedMovie: () => {},
+            saveMovie: () => {
+            },
+            setMovieToEdit: () => {
+            },
+            editMovie: () => {
+            },
+            saveEditedMovie: () => {
+            },
         };
         const component = mount(<Provider store={store}>
             <EditMovieWrapper {...props}/>
@@ -107,4 +118,39 @@ describe('Main components', () => {
             <MainWrapper {...props}/>
         </Provider>);
     });
+
+    it('MovieFullCard', () => {
+        const props = {
+            allMovies: [
+                {
+                    id: 'test',
+                    actors: ['test0']
+                }
+            ],
+            movieId: 'test'
+        }
+        shallow(<MovieFullCard {...props}/>)
+    })
+
+    it ('MovieFullCardWrapper', () => {
+        const props = {
+            allMovies: [
+                {
+                    id: 'test',
+                    actors: ['test0'],
+                    titleRus: '',
+                    titleOrig: '',
+                    year: '',
+                    country: '',
+                    director:'',
+                    imdbRate: '',
+                    description: '',
+                }
+            ],
+            movieId: 'test'
+        }
+        mount(<Provider store={store}>
+            <MovieFullCardWrapper {...props}/>
+        </Provider>);
+    })
 });
