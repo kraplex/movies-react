@@ -15,16 +15,24 @@ module.exports = {
             template: path.resolve(__dirname, "src", "index.html")
         }),
     ],
+    target: 'web',
     devServer: {
-        historyApiFallback: true,
-        proxy: {
-            '/api/**': {
-                target: process.env.BACKEND_URL,
-                secure: false,
-                changeOrigin: true,
-            }
-        },
+        contentBase: path.join(__dirname, 'dist'),
+        publicPath: '/',
+        open: true,
+        watchContentBase: true,
+        port: 8080,
     },
+    // devServer: {
+    //     historyApiFallback: true,
+    //     proxy: {
+    //         '/api/**': {
+    //             target: 'web',
+    //             secure: false,
+    //             changeOrigin: true,
+    //         }
+    //     },
+    // },
     module: {
         rules: [
             {
@@ -43,9 +51,9 @@ module.exports = {
                 use: ["style-loader", "css-loader", "less-loader"],
             },
             {
-                test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|otf|svg)$/,
+                test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|otf)$/,
                 type: 'asset'
-            },
+            }
         ]
     }
 };
