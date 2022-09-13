@@ -9,7 +9,7 @@ module.exports = {
         clean: true,
         filename: 'bundle.js'
     },
-    devtool: 'cheap-module-source-map',
+    devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "src", "index.html")
@@ -23,16 +23,9 @@ module.exports = {
         watchContentBase: true,
         port: 8080,
     },
-    // devServer: {
-    //     historyApiFallback: true,
-    //     proxy: {
-    //         '/api/**': {
-    //             target: 'web',
-    //             secure: false,
-    //             changeOrigin: true,
-    //         }
-    //     },
-    // },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
     module: {
         rules: [
             {
@@ -41,6 +34,11 @@ module.exports = {
                 include: [
                     path.resolve(__dirname, "src")
                 ]
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
